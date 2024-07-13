@@ -1,0 +1,93 @@
+managed;
+strict ( 2 );
+
+define behavior for ZR_TRAVEL_D //alias <alias_name>
+ implementation in class zbp_travel_d unique
+persistent table /dmo/a_travel_d
+lock master
+authorization master ( instance )
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+  field ( numbering : managed,readonly ) TravelUUID;
+  association _Booking { create; }
+
+   mapping for /dmo/a_travel_d
+    {
+      AgencyID           = agency_id;
+      BeginDate          = begin_date;
+      BookingFee         = booking_fee;
+      CurrencyCode       = currency_code;
+      CustomerID         = customer_id;
+      Description        = description;
+      EndDate            = end_date;
+      LastChangedAt      = last_changed_at;
+      LocalCreatedAt     = local_created_at;
+      LocalCreatedBy     = local_created_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LocalLastChangedBy = local_last_changed_by;
+      OverallStatus      = overall_status;
+      TotalPrice         = total_price;
+      TravelID           = travel_id;
+      TravelUUID         = travel_uuid;
+    }
+
+}
+
+define behavior for ZR_BOOKING_D //alias <alias_name>
+persistent table /dmo/a_booking_d
+lock dependent by _Travel
+authorization dependent by _Travel
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( numbering : managed,readonly ) BookingUUID;
+  field ( readonly ) TravelUUID;
+  association _Travel;
+  association _BookingSupplement { create; }
+
+    mapping for /dmo/a_booking_d
+    {
+      AirlineID          = carrier_id;
+      BookingDate        = booking_date;
+      BookingID          = booking_id;
+      BookingStatus      = booking_status;
+      BookingUUID        = booking_uuid;
+      ConnectionID       = connection_id;
+      CurrencyCode       = currency_code;
+      CustomerID         = customer_id;
+      FlightDate         = flight_date;
+      FlightPrice        = flight_price;
+      LocalLastChangedAt = local_last_changed_at;
+      TravelUUID         = parent_uuid;
+    }
+}
+
+define behavior for ZR_BookingSupplement_D //alias <alias_name>
+persistent table /dmo/a_bksuppl_d
+lock dependent by _Travel
+authorization dependent by _Travel
+//etag master <field_name>
+{
+  update;
+  delete;
+  field ( numbering : managed,readonly ) BookSupplUUID;
+  field ( readonly ) TravelUUID,BookingUUID;
+  association _Travel;
+  association _Booking;
+
+    mapping for /dmo/a_bksuppl_d
+    {
+      BookSupplPrice      = price;
+      BookSupplUUID       = booksuppl_uuid;
+      BookingSupplementID = booking_supplement_id;
+      BookingUUID         = parent_uuid;
+      CurrencyCode        = currency_code;
+      LocalLastChangedAt  = local_last_changed_at;
+      SupplementID        = supplement_id;
+      TravelUUID          = root_uuid;
+    }
+}

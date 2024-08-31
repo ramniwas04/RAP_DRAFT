@@ -20,7 +20,7 @@ define root view entity ZC_TRAVEL_A_D
 
       @Search.defaultSearchElement: true
       @ObjectModel.text.element: ['CustomerName']
-      @Consumption.valueHelpDefinition: [{entity: {name: '/DMO/I_Customer_StdVH', element: 'CustomerID' }, useForValidation: true}]
+      @Consumption.valueHelpDefinition: [{entity: {name: '/DMO/I_Customer_StdVH', element: 'CustomerID' } }]
       CustomerID,
       _Customer.LastName as CustomerName,
 

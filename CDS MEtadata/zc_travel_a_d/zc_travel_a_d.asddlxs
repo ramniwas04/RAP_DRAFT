@@ -22,15 +22,15 @@ annotate entity ZC_TRAVEL_A_D
   @UI.hidden: true
   TravelUUID;
   
-  @UI: { lineItem:       [ { position: 10, importance: #HIGH }
-//                           { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' }, 
-//                           { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }, 
-//                           { type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount', invocationGrouping: #CHANGE_SET } 
+  @UI: { lineItem:       [ { position: 10, importance: #HIGH },
+                           { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' }, 
+                           { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }, 
+                           { type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount', invocationGrouping: #CHANGE_SET } 
                            ],
-         identification: [ { position: 10, label: 'Travel ID' }
-//                           { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' },
-//                           { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }, 
-//                           { type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount' } 
+         identification: [ { position: 10, label: 'Travel ID' },
+                           { type: #FOR_ACTION, dataAction: 'acceptTravel', label: 'Accept Travel' },
+                           { type: #FOR_ACTION, dataAction: 'rejectTravel', label: 'Reject Travel' }, 
+                           { type: #FOR_ACTION, dataAction: 'deductDiscount', label: 'Deduct Discount' } 
                            ],
          selectionField: [ { position: 10 } ] }  
   TravelID;

@@ -20,8 +20,8 @@ define view entity ZC_BookingSupplement_A_D
       @Consumption.valueHelpDefinition: [ 
           {  entity: {name: '/DMO/I_Supplement_StdVH', element: 'SupplementID' },
              additionalBinding: [ { localElement: 'BookSupplPrice',  element: 'Price',        usage: #RESULT },
-                                  { localElement: 'CurrencyCode',    element: 'CurrencyCode', usage: #RESULT }], 
-             useForValidation: true }
+                                  { localElement: 'CurrencyCode',    element: 'CurrencyCode', usage: #RESULT }]
+              }
         ]
       SupplementID,
       _SupplementText.Description as SupplementDescription : localized,
@@ -37,5 +37,5 @@ define view entity ZC_BookingSupplement_A_D
       _Booking : redirected to parent ZC_Booking_A_D,
       _Product,
       _SupplementText,
-      _Travel  : redirected to ZC_Travel_A_D
+      _Travel  : redirected to ZC_TRAVEL_A_D
 }

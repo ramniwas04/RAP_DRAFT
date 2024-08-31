@@ -4,7 +4,7 @@
 define root view entity ZR_TRAVEL_D
   as select from /dmo/a_travel_d
 
-  composition [0..*] of ZR_BOOKING_D             as _Booking
+  composition [1..*] of ZR_BOOKING_D             as _Booking
  //these part of the ABAP Flight Reference Scenario
   association [0..1] to /DMO/I_Agency            as _Agency        on $projection.AgencyID = _Agency.AgencyID
   association [0..1] to /DMO/I_Customer          as _Customer      on $projection.CustomerID = _Customer.CustomerID

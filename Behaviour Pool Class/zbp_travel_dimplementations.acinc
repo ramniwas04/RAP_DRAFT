@@ -34,6 +34,18 @@ CLASS lhc_ZR_TRAVEL_D DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR zr_travel_d~settravelid.
     METHODS validatecustomer FOR VALIDATE ON SAVE
       IMPORTING keys FOR zr_travel_d~validatecustomer.
+    METHODS activate FOR MODIFY
+      IMPORTING keys FOR ACTION zr_travel_d~activate.
+
+    METHODS discard FOR MODIFY
+      IMPORTING keys FOR ACTION zr_travel_d~discard.
+
+    METHODS edit FOR MODIFY
+      IMPORTING keys FOR ACTION zr_travel_d~edit.
+
+    METHODS resume FOR MODIFY
+      IMPORTING keys FOR ACTION zr_travel_d~resume.
+
 
 ENDCLASS.
 
@@ -177,29 +189,29 @@ CLASS lhc_ZR_TRAVEL_D IMPLEMENTATION.
      WHERE agency_id = @lt_agency-agency_id
      INTO TABLE @DATA(lt_ag_ct).
     IF sy-subrc IS INITIAL.
-
-      LOOP AT entities INTO DATA(ls_entity).
-
-        READ TABLE lt_ag_ct ASSIGNING FIELD-SYMBOL(<ls_age_ctry>)
-                            WITH KEY agency_id = ls_entity-AgencyID.
-
-        AUTHORITY-CHECK OBJECT '/DMO/TRVL'
-           ID '/DMO/CNTRY' FIELD <ls_age_ctry>-country_code
-          ID 'ACTVT' FIELD '02'.
-
-        IF sy-subrc IS NOT INITIAL.
-          failed-zr_travel_d = VALUE #( ( %tky = ls_entity-%tky ) ).
-          APPEND VALUE #( %tky = ls_entity-%tky
-                            %msg = NEW /dmo/cm_flight_messages(
-                                                     textid    = /dmo/cm_flight_messages=>not_authorized_for_agencyid
-                                                     agency_id = ls_entity-AgencyID
-                                                     severity  = if_abap_behv_message=>severity-error )
-                            %element-AgencyID = if_abap_behv=>mk-on
-                           ) TO reported-zr_travel_d.
-        ENDIF.
-
-      ENDLOOP.
-
+*
+*      LOOP AT entities INTO DATA(ls_entity).
+*
+*        READ TABLE lt_ag_ct ASSIGNING FIELD-SYMBOL(<ls_age_ctry>)
+*                            WITH KEY agency_id = ls_entity-AgencyID.
+*
+*        AUTHORITY-CHECK OBJECT '/DMO/TRVL'
+*           ID '/DMO/CNTRY' FIELD <ls_age_ctry>-country_code
+*          ID 'ACTVT' FIELD '02'.
+*
+*        IF sy-subrc IS NOT INITIAL.
+*          failed-zr_travel_d = VALUE #( ( %tky = ls_entity-%tky ) ).
+*          APPEND VALUE #( %tky = ls_entity-%tky
+*                            %msg = NEW /dmo/cm_flight_messages(
+*                                                     textid    = /dmo/cm_flight_messages=>not_authorized_for_agencyid
+*                                                     agency_id = ls_entity-AgencyID
+*                                                     severity  = if_abap_behv_message=>severity-error )
+*                            %element-AgencyID = if_abap_behv=>mk-on
+*                           ) TO reported-zr_travel_d.
+*        ENDIF.
+*
+*      ENDLOOP.
+*
 
     ENDIF.
 
@@ -502,6 +514,19 @@ CLASS lhc_ZR_TRAVEL_D IMPLEMENTATION.
       ENDIF.
 
     ENDLOOP.
+  ENDMETHOD.
+
+
+  METHOD Activate.
+  ENDMETHOD.
+
+  METHOD Discard.
+  ENDMETHOD.
+
+  METHOD Edit.
+  ENDMETHOD.
+
+  METHOD Resume.
   ENDMETHOD.
 
 ENDCLASS.

@@ -1,0 +1,24 @@
+@EndUserText.label : 'Draft table for entity ZR_BOOKING_D'
+@AbapCatalog.enhancement.category : #EXTENSIBLE_ANY
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zdr_booking_d {
+
+  key mandt          : mandt not null;
+  key bookinguuid    : sysuuid_x16 not null;
+  traveluuid         : sysuuid_x16;
+  bookingid          : /dmo/booking_id;
+  bookingdate        : /dmo/booking_date;
+  customerid         : /dmo/customer_id;
+  airlineid          : /dmo/carrier_id;
+  connectionid       : /dmo/connection_id;
+  flightdate         : /dmo/flight_date;
+  @Semantics.amount.currencyCode : 'zdr_booking_d.currencycode'
+  flightprice        : /dmo/flight_price;
+  currencycode       : /dmo/currency_code;
+  bookingstatus      : /dmo/booking_status;
+  locallastchangedat : abp_locinst_lastchange_tstmpl;
+  "%admin"           : include sych_bdl_draft_admin_inc;
+
+}

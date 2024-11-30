@@ -1,0 +1,20 @@
+@EndUserText.label : 'Draft table for entity ZR_BOOKINGSUPPLEMENT_D'
+@AbapCatalog.enhancement.category : #EXTENSIBLE_ANY
+@AbapCatalog.tableCategory : #TRANSPARENT
+@AbapCatalog.deliveryClass : #A
+@AbapCatalog.dataMaintenance : #RESTRICTED
+define table zdr_bksuppl_d {
+
+  key mandt           : mandt not null;
+  key booksuppluuid   : sysuuid_x16 not null;
+  traveluuid          : sysuuid_x16;
+  bookinguuid         : sysuuid_x16;
+  bookingsupplementid : /dmo/booking_supplement_id;
+  supplementid        : /dmo/supplement_id;
+  @Semantics.amount.currencyCode : 'zdr_bksuppl_d.currencycode'
+  booksupplprice      : /dmo/supplement_price;
+  currencycode        : /dmo/currency_code;
+  locallastchangedat  : abp_locinst_lastchange_tstmpl;
+  "%admin"            : include sych_bdl_draft_admin_inc;
+
+}
